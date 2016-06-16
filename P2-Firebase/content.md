@@ -12,9 +12,9 @@ First step is to navigate to [Firebase](https://firebase.google.com/) and click 
 
 ##First project
 
-Once your account is setup, navigate to the [console](https://console.firebase.google.com/)
+Once your account is set up, navigate to the [console](https://console.firebase.google.com/)
 
-If you havn't been promoted to create a *New Project* already, please do so now. You can name it whatever you like, I named it *Sushi*.
+If you haven't been prompted to create a *New Project* already, please do so now. You can name it whatever you like, I named it *Sushi*.
 
 Click on your project and you should see a screen similar to this:
 
@@ -35,7 +35,7 @@ All done :]
 
 #Profile design
 
-Let's consider a player's profile for a high score table, what would the data requirements be? You should start of by considering the bare minimum and expand as necessary.
+Let's consider a player's profile for a high score table, what would the data requirements be? You should start off by considering the bare minimum and expand as necessary.
 
 > [action]
 > What fields would you start with?
@@ -69,7 +69,7 @@ To translate the proposed data structure into practice, there needs to be a *hig
 > Replicate the following data structure:
 > ![Firebase database overview](../Tutorial-Images/firebase_database_stage_1.png)
 
-The id relates to the player's Facebook ID, in the above your using the ID of [MakeSchool](https://www.facebook.com/makeschool/).  It's more fun to use your own, to grab your Facebook ID you can grab it at [Find my Facebook ID](http://findmyfbid.com/).
+The id relates to the player's Facebook ID, in the above you're using the ID of [MakeSchool](https://www.facebook.com/makeschool/).  It's more fun to use your own, to grab your Facebook ID you can grab it at [Find my Facebook ID](http://findmyfbid.com/).
 
 > [action]
 > Can you add the remaining data fields?
@@ -81,7 +81,7 @@ The id relates to the player's Facebook ID, in the above your using the ID of [M
 > Your data structure should look very similar to this:
 > ![Firebase data](../Tutorial-Images/firebase_data.png)
 
-You may have noticed the Facebook URL in **image**, there is a nice way to grab a profile image at the right size for your game.  You can use the URL *https://graph.facebook.com/<YOUR ID>/picture?type=small*
+You may have noticed the Facebook URL in **image**, there is a nice way to grab a profile image at the right size for your game.  You can use the URL *https://graph.facebook.com/[YOUR_ID]/picture?type=small*
 
 Great, you now have real data to test with.  In Sushi Neko you will be reading and writing data, I find it easier to tackle *read* operations first with test data.  That way you know exactly what you need to *write*.
 
@@ -92,6 +92,6 @@ Great, you've learnt to:
 - Create a new Firebase account
 - Capture database requirements
 - Design database structure
-- Adding test data
+- Add test data
 
 In the next chapter you will be setting up a Facebook account to enable the social authentication element.
