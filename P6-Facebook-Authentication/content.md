@@ -8,7 +8,7 @@ Now we know about other players, as this information is retrieved from the Fireb
 > [info]
 > *From this point on you are required to test on device*
 
-#Authentication
+##Authentication
 
 The first step is authentication with Facebook using the Facebook SDK, this code is well documented at [Facebook Docs](https://developers.facebook.com/docs/)
 
@@ -122,7 +122,7 @@ You should have gotten a notification in the console of `Data saved success`.
 
 The moment of truth, navigate to your Firebase database view and you will hopefully see something like this.
 
-![Database view](database_view_final.png)
+![Database view](../Tutorial-Images/database_view_final.png)
 
 #Summary
 

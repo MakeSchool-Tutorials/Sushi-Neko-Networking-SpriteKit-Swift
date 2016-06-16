@@ -3,14 +3,12 @@ title: Setting up Firebase
 slug: setting-up-firebase
 ---
 
-#Firebase
-
 So what is [Firebase](https://firebase.google.com/)? Firebase is a cloud services provider offering numerous services.
 You will be using the **Firebase Database** to manage player information.
 
 First step is to navigate to [Firebase](https://firebase.google.com/) and click **SIGN IN**, this will give you the option to create a new account.  Follow this process.
 
-##First project
+#First project
 
 Once your account is set up, navigate to the [console](https://console.firebase.google.com/)
 

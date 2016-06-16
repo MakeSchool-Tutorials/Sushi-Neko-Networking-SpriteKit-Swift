@@ -3,8 +3,6 @@ title: Setting up Facebook
 slug: setting-up-facebook
 ---
 
-#Facebook authentication
-
 You will be using Facebook to provide player social authentication, this in turns grants you access to the user information you want such as the user's profile image and name.
 
 Thankfully Facebook has a well documented process to take you through this.

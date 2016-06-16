@@ -3,8 +3,6 @@ title: Setting up CocoaPods
 slug: setting-up-cocoapods
 ---
 
-#CocoaPods
-
 So what is CocoaPods? CocoaPods manages library dependencies for your Xcode projects.
 For example, you want to add some fantastic new functionality to your project and you've just found a site that provides an iOS library that would be perfect.  The site gives you one option to download a zip file and go through various steps manually to get it working in your project.  
 
@@ -12,7 +10,7 @@ What if this new library requires additional support libraries to work? Then it'
 
 CocoaPods to the rescue! CocoaPods allow you to specify a text file of desired libraries and CocoaPods will automagically take care of the rest. Ensuring all libraries and dependencies are correctly linked together in your Xcode project.
 
-#Installing CocoaPods
+##Installing CocoaPods
 
 On OS X Yosemite and Mavericks, Ruby 2.0 is included. To install CocoaPods.
 

@@ -6,7 +6,7 @@ slug: loading-data
 Finally, time to start coding!
 You will start by connecting to the Firebase database and retrieving the test data you created earlier.
 
-#Firebase database
+##Firebase database
 
 First you need to create a reference to your Firebase database.
 

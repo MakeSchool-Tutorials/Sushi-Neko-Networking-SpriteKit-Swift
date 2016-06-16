@@ -9,7 +9,7 @@ The final result should look a lot like this, showing the Make School player at 
 
 ![Screenshot Sushi Tower](../Tutorial-Images/screenshot_social_place.png)
 
-#Adding the high score tower
+##Adding the high score tower
 
 You need to store player profiles and access them using an index that matches their score.  
 
