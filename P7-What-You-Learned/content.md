@@ -24,9 +24,9 @@ Let's take a look at what you have learned.
 
 ##Facebook
 
-- Setup a new Facebook App
-- Integrate Objective-C Facebook code into Swift
-- Implement authentication
+- Setting up a new Facebook App
+- Integrating Objective-C Facebook code into Swift
+- Implementing authentication
 - Requesting permission for user information
 - Retrieving user information and storing in local profile
 

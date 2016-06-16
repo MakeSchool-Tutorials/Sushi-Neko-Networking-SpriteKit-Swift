@@ -10,7 +10,7 @@ For example, you want to add some fantastic new functionality to your project an
 
 What if this new library requires additional support libraries to work? Then it's up to you to source and install them correctly. What if it requires a specific version of a given library? Welcome to dependency hell...
 
-CocoaPods to the rescue, CocoaPods allow you to specify a text file of desired libraries and CocoaPods will automagically take care of the rest. Ensuring all libraries and dependencies are correctly linked together in your Xcode project.
+CocoaPods to the rescue! CocoaPods allow you to specify a text file of desired libraries and CocoaPods will automagically take care of the rest. Ensuring all libraries and dependencies are correctly linked together in your Xcode project.
 
 #Installing CocoaPods
 
@@ -24,7 +24,7 @@ sudo gem install cocoapods
 ```
 >
 
-If you have any issues, take a look first at the [CocoaPods Troubleshooting](https://guides.cocoapods.org/using/troubleshooting#installing-cocoapods). If you still have a problem, please ask :]
+If you have any issues, take a look first at [CocoaPods Troubleshooting](https://guides.cocoapods.org/using/troubleshooting#installing-cocoapods). If you still have a problem, please ask :]
 
 #CocoaPods setup
 
