@@ -13,7 +13,7 @@ Now we know about other players, as this information is retrieved from the Fireb
 The first step is authentication with Facebook using the Facebook SDK, this code is well documented at [Facebook Docs](https://developers.facebook.com/docs/)
 
 1. Check if we already have a stored access token
-2. If not then request a login and ask for permission for the users profile, email and friends list.
+2. If not then request a login and ask for permission for the user's profile, email and friends list.
 
 > [action]
 > Add the following code before the Firebase query in `didMoveToView(...)`
@@ -44,7 +44,7 @@ If you authenticated you should see the *accessToken* value displayed in the con
 
 #Facebook user profile
 
-Once authenticated you can retrieve the users information.  You want their facebook ID, first name and profile URL.
+Once authenticated you can retrieve the user's information.  You want their Facebook ID, first name and profile URL.
 Before you retrieve this data you need somewhere to store it.
 
 > [action]
@@ -85,7 +85,7 @@ So finally the game now knows who you are!
 #Saving player data
 
 Now you are ready to save your own profile to the Firebase database!
-You don't want to save it every time the game ends, only when you've reached a new high score.  You should also only save data if this profile has a facebook id.
+You don't want to save it every time the game ends, only when you've reached a new high score.  You should also only save data if this profile has a Facebook id.
 
 > [action]
 > Add the following code in the `gameOver` method, after `character.runAction(...)`:
@@ -118,7 +118,7 @@ if score > playerProfile.score && !playerProfile.facebookId.isEmpty {
 >
 
 Run the game... You should achieve a high score as your default score is `0`.
-You should have got notification in the console of `Data saved success`
+You should have gotten a notification in the console of `Data saved success`.
 
 The moment of truth, navigate to your Firebase database view and you will hopefully see something like this.
 
@@ -133,6 +133,6 @@ You learnt to:
 - Ask for access permissions
 - Retrieve user profile data
 - Store profile data
-- Saving profile data to Firebase
+- Save profile data to Firebase
 
 The next chapter will be a recap of everything you have covered so far, well done.

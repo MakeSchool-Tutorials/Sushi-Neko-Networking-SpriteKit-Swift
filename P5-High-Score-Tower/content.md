@@ -27,7 +27,7 @@ var scoreTower: [Int:Profile] = [:]
 ```
 >
 
-Now you have a suitable storage property, you need to add each profile(s) to the dictionary.
+Now you have a suitable storage property, you need to add each profile to the dictionary.
 
 > [action]
 > Can you add profiles retrieved from the Firebase database query to the *scoreTower*?
@@ -84,7 +84,7 @@ Now you have a new state, let's put it into action.
 > [action]
 > Change the default `state` to `.Loading`
 
-You want to break out the initial `addPiece*` methods calls into a new function so this action can be called after `.Loading`.
+You want to break out the initial `addPiece` method calls into a new function so this action can be called after `.Loading`.
 
 > [action]
 > Add the following method to the *GameScene* class
@@ -92,11 +92,11 @@ You want to break out the initial `addPiece*` methods calls into a new function 
 ```
 func stackSushi() {
     /* Seed the sushi tower */
-
+>
     /* Manually stack the start of the tower */
     addTowerPiece(.None)
     addTowerPiece(.Right)
-
+>
     /* Randomize tower to just outside of the screen */
     addRandomPieces(10)
 }
@@ -106,7 +106,7 @@ func stackSushi() {
 Run the game...
 Oh no it's broken...
 
-You have the high tower data but no sushi tower.  You need to call `stackSushi` to generate the tower, it would be good to call it after populating the high score tower.
+You have the high score tower data but no sushi tower.  You need to call `stackSushi` to generate the tower, it would be good to call it after populating the high score tower.
 
 > [action]
 > Update the `state` property as shown:
@@ -185,17 +185,17 @@ var sushiCounter = 0
 sushiCounter += 1
 ```
 
-With that in place, let's look at how to create a *SKSpriteNode* from a web image.
+With that in place, let's look at how to create an *SKSpriteNode* from a web image.
 
 ##Creating a Sprite from a URL
 
-There is no direct method to create a *SKSpriteNode* from a URL. You have to jump through a few hoops first.
+There is no direct method to create an *SKSpriteNode* from a URL. You have to jump through a few hoops first.
 
-1. Create the *NSURL* by supplying the *Profile.imgURL*
-1. Create the *NSData* by supply a *NSURL*
-1. Create a *UIImage* by supplying *NSData*
-1. Create a *SKTexture* by supplying a *UIImage*
-1. Create a *SKSpriteNode* by supplying a *SKTexture*
+1. Create an *NSURL* by supplying the *Profile.imgURL*
+1. Create an *NSData* by supply an *NSURL*
+1. Create a *UIImage* by supplying an *NSData*
+1. Create an *SKTexture* by supplying a *UIImage*
+1. Create an *SKSpriteNode* by supplying an *SKTexture*
 
 > [action]
 > How many of these steps can you attempt yourself ?
@@ -214,8 +214,7 @@ let imgNode = SKSpriteNode(texture: imgTex, size: CGSize(width: 50, height: 50))
 ```
 >
 
-When dealing with data that could possibly be invalid, it's good to use the `guard` statement to protect your process
-from any possible bad data issues. For example when grabbing the `profile.imgURL` you want to ensure this was valid before moving on to the more expensive operations in the process. If it's invalid you want to skip it and move on to the next entry.
+When dealing with data that could possibly be invalid, it's good to use the `guard` statement to protect your process from any possible bad data issues. For example when grabbing the `profile.imgURL` you want to ensure this was valid before moving on to the more expensive operations in the process. If it's invalid you want to skip it and move on to the next entry.
 
 > [action]
 > Add the following code to the end of `addTowerPiece(...)`:
@@ -230,19 +229,18 @@ guard let imgURL = NSURL(string: profile.imgURL) else { return }
 /* Perform image download task */
 guard let imgData = NSData(contentsOfURL: imgURL) else { return }
 guard let img = UIImage(data: imgData) else { return }
-
+>
 /* Create texture from image */
 let imgTex = SKTexture(image: img)
-
+>
 /* Create a new sprite using profile texture, cap size */
 let imgNode = SKSpriteNode(texture: imgTex, size: CGSize(width: 50, height: 50))
-
+>
 /* Add profile sprite as child of sushi piece */
 newPiece.addChild(imgNode)
 imgNode.zPosition = newPiece.zPosition + 1
-
-```
 >
+```
 
 ##Adding a border
 
@@ -378,7 +376,7 @@ You've learnt to:
 - Expand game state management
 - Use Firebase to retrieve player data
 - Populate the high score tower
-- Downloading remote images
+- Download remote images
 - Turn remote images into Sprite Nodes
 - Perform asynchronous operations
 

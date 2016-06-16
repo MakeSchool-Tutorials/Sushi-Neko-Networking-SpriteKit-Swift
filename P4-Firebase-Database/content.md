@@ -8,7 +8,7 @@ You will start by connecting to the Firebase database and retrieving the test da
 
 #Firebase database
 
-First you need to create a reference to your firebase database,
+First you need to create a reference to your Firebase database.
 
 > [action]
 > Add this property to your *GameScene* class.
@@ -23,7 +23,7 @@ In your case you want to have the root of your reference to be in the *HighScore
 
 #Reading data
 
-Firebase offers different ways to retrieve information, you can subscribe to events and Firebase will notify your app in realtime of any changes.  This is a great powerful feature for example in a chat based application. I would recommend you have a look at the [Data Retrieval](https://firebase.google.com/docs/database/ios/retrieve-data) documentation.
+Firebase offers different ways to retrieve information, you can subscribe to events and Firebase will notify your app in realtime of any changes.  This is a powerful feature for example in a chat based application. I would recommend you have a look at the [Data Retrieval](https://firebase.google.com/docs/database/ios/retrieve-data) documentation.
 
 In this tutorial you don't really need to be notified the instant someone gets a high score.  You will be instead using a query to read-once and pull back the top 5 high scores.
 

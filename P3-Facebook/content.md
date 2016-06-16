@@ -7,7 +7,7 @@ slug: setting-up-facebook
 
 You will be using Facebook to provide player social authentication, this in turns grants you access to the user information you want such as the user's profile image and name.
 
-Thankfully Facebook have a well documented process to take you through this. 
+Thankfully Facebook has a well documented process to take you through this.
 
 > [action]
 > Navigate to the [Facebook Developers Site](https://developers.facebook.com/apps/)
