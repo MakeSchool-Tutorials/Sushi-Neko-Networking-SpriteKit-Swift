@@ -11,10 +11,32 @@ If you have any challenge suggestions, we would love to hear them.  Please provi
 
 It would be a good idea to create a **new branch** in your repo for these challenges.
 
-#Improve the player profile display
+##Improve the player profile display
 
 > [action]
-> Currently the player image is displayed with a small border, can you dress this up?
+> Currently the player image is displayed with a small border, can you make this look good?
+
+##Player score beaten impact
+
+> [action]
+> Improve the visual impact when the player punches a sushi block that contains a high score.
+
+##Authentication
+
+Currently although the player is authenticated, this authentication isn't really used for security.
+
+> [action]
+> Can you modify the game so only authenticated players can upload high scores.
+
+##Friend list
+
+> [action]
+> Can you implement database storage for a player's FB friends list.
+
+##Friends only
+
+> [action]
+> Can you modify the player profile retrieval to only return friends of the player.
 
 #Summary
 
