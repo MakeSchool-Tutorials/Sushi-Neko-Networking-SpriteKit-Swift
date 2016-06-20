@@ -12,24 +12,29 @@ First step is to navigate to [Firebase](https://firebase.google.com/) and click 
 
 Once your account is set up, navigate to the [console](https://console.firebase.google.com/)
 
-If you haven't been prompted to create a *New Project* already, please do so now. You can name it whatever you like, I named it *Sushi*.
+If you haven't been prompted to create a *New Project* already, please do so now.
 
-Click on your project and you should see a screen similar to this:
+> [action]
+> Create a *New Project* called `Sushi`
+
+Click on the project and you should see a screen similar to this:
 
 ![Firebase console](../Tutorial-Images/firebase_console.png)
 
-Next click on *Database* under the develop section, you will be presented with the database editor tool.  This is a great tool for debugging and creating test data for your application.
-
-![Firebase database overview](../Tutorial-Images/firebase_database_overview.png).  
-
-##Project settings
-
-Great, there is one last step.  You need to download a `GoogleService-Info.plist` from Firebase and add this to your project.
+Great, next you need to setup the Firebase app for iOS.
 
 > [action]
-> Navigate to [Firebase Project Settings](https://console.firebase.google.com/project/radiant-heat-4408/settings/general/) and run through the *iOS* app process.
+> Click on `Add Firebase to your iOS app` and follow the setup process.
+> Please ensure you add the `GoogleService-Info.plist` to your project.
+> **Note:** You can skip the `pod install` section as this was taken care of in the earlier CocoaPods chapter of this tutorial.
 
-All done :]
+##Database Editor
+
+Click on *Database* under the develop section, you will be presented with the database editor tool.  This is a great tool for debugging and creating test data for your application.
+
+![Firebase database overview](../Tutorial-Images/firebase_database_overview.png)
+
+You will be using this once you've designed a player profile data structure.
 
 #Profile design
 
@@ -64,7 +69,7 @@ To translate the proposed data structure into practice, there needs to be a *hig
 <!-- -->
 
 > [action]
-> Replicate the following data structure:
+> Replicate the following data structure in the database editor:
 > ![Firebase database overview](../Tutorial-Images/firebase_database_stage_1.png)
 
 The id relates to the player's Facebook ID, in the above you're using the ID of [MakeSchool](https://www.facebook.com/makeschool/).  It's more fun to use your own, to grab your Facebook ID you can grab it at [Find my Facebook ID](http://findmyfbid.com/).
