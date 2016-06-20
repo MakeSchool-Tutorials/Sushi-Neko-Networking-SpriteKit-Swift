@@ -43,7 +43,7 @@ open -a Xcode Podfile # opens your Podfile in XCode
 You will need to add the 'Firebase' requirement to the podfile.
 
 > [action]
-> Ensure *Podfile* reads as follows:
+> Ensure the *Podfile* reads as follows:
 >
 ```
 # Uncomment this line to define a global platform for your project
@@ -54,7 +54,8 @@ target 'SushiNeko' do
   use_frameworks!
 >
   # Pods for SushiNeko
-  pod 'Firebase', '>= 2.5.1'
+  pod 'Firebase/Core'
+  pod 'Firebase/Database'
 >
   target 'SushiNekoTests' do
     inherit! :search_paths
