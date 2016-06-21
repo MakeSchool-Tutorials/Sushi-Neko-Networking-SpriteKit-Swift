@@ -23,10 +23,10 @@ Throughout this tutorial you will learn many concepts including how to:
 
 #Time to get started
 
-You will be building on top of your existing Sushi Neko project. To ensure you have a clean working foundation  please [Download the project solution](https://github.com/MakeSchool-Tutorials/Sushi-Neko-Networking-SpriteKit-Swift-Solution/) and unzip to your favorite working folder.
+You will be building on top of your existing Sushi Neko project. To ensure you have a clean working foundation  please [Download the project solution](https://github.com/MakeSchool-Tutorials/Sushi-Neko-SpriteKit-Swift-Solution/) and unzip to your favorite working folder.
 
 Don't open the project just yet, in the next chapter you will be setting up CocoaPods and this requires the project to be closed.
 
 #Feedback
 
-If you have feedback on this tutorial or find any mistakes, please open issues on the [GitHub Repository](https://github.com/MakeSchool-Tutorials/Sushi-Neko-SpriteKit-Swift).
+If you have feedback on this tutorial or find any mistakes, please open issues on the [GitHub Repository](https://github.com/MakeSchool-Tutorials/Sushi-Neko-Networking-SpriteKit-Swift).
