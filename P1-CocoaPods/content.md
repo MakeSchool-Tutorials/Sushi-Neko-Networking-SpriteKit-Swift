@@ -117,7 +117,7 @@ pod 'FBSDKLoginKit'
 ```
 > ![Podfile](../Tutorial-Images/podfile_complete.png)
 
-Next update your CocoaPods
+## Next update your CocoaPods
 
 > [action]
 > Open terminal and run the following commands:
