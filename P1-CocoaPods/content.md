@@ -85,7 +85,7 @@ pod install
 
 You should hopefully see the following terminal output:
 
-> ![CocoaPod Install](../Tutorial-Images/cocoapod_install.png)
+![CocoaPod Install](../Tutorial-Images/cocoapod_install.png)
 
 Hurrah, you've setup CocoaPods and installed your first Pod!
 
@@ -95,6 +95,7 @@ Open *SushiNeko.xcworkspace*, from now on please open the project this way.  You
 
 ![CocoaPod workspace](../Tutorial-Images/xcode_workspace_structure.png)
 
+> [action]
 > Open *GameScene.swift* add the following after `import SpriteKit`
 >
 ```
@@ -105,6 +106,7 @@ import FirebaseDatabase
 
 #Installing the Facebook library pods
 
+> [action]
 > Open the *Podfile* in the *Pods* project.
 > Add the following after the **Firebase** pod.
 >
@@ -128,6 +130,7 @@ pod update
 
 <!-- -->
 
+> [action]
 > Open *GameScene.swift* add the following after `import Firebase`
 >
 ```
