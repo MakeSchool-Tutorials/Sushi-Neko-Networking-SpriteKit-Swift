@@ -88,6 +88,17 @@ You may have noticed the Facebook URL in **image**, there is a nice way to grab 
 
 Great, you now have real data to test with.  In Sushi Neko you will be reading and writing data, I find it easier to tackle *read* operations first with test data.  That way you know exactly what you need to *write*.
 
+#Permissions
+
+In a typical project you would want to lock down your permissions.  You might not might that anyone can read the high score table.  However, you probably only want 'authenticated' users to be able to modify (write) data.
+
+For this project you are going to open up read & write publicly to make the development and debug stage easier.
+
+> [action]
+> Select the *Rules* tab in `Realtime Database` and ensure it reads as shown:
+> ![Firebase data rules](../Tutorial-Images/firebase_data_rules.png)
+
+
 #Summary
 
 Great, you've learnt to:
