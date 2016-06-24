@@ -12,6 +12,8 @@ The [Firebase SDK](https://firebase.google.com/docs/) will be utilized for cloud
 
 #What you will learn
 
+Lots of cool things!!!!
+
 Throughout this tutorial you will learn many concepts including how to:
 
 - Use CocoaPods to elegantly scale your project
