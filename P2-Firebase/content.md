@@ -76,7 +76,7 @@ The id relates to the player's Facebook ID, in the above you're using the ID of 
 
 > [action]
 > Can you add the remaining data fields?
-> **Note:** The Facebook ID and image should both be strings so remember those quotes.
+> **Note:** The Facebook ID and image values should both be strings so remember to enclose them in quotes as shown.
 
 <!-- -->
 
