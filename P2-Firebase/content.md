@@ -90,9 +90,10 @@ Great, you now have real data to test with.  In Sushi Neko you will be reading a
 
 #Permissions
 
-In a typical project you would want to lock down your permissions.  You might not might that anyone can read the high score table.  However, you probably only want 'authenticated' users to be able to modify (write) data.
+In a typical project you would want to lock down your permissions.  It may be okay for anyone to read the high score table.  However, when you release a game, you probably only want *authenticated* users to be able to modify (write) data.
 
 For this project you are going to open up read & write publicly to make the development and debug stage easier.
+If you have a prompt regarding authentication, you can dismiss this as you will be taking care of permissions.
 
 > [action]
 > Select the *Rules* tab in `Realtime Database` and ensure it reads as shown:
