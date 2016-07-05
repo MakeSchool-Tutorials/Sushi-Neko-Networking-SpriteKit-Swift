@@ -153,7 +153,7 @@ firebaseRef.queryOrderedByChild("score").queryLimitedToLast(5).observeEventType(
                 profile.score = child.value.objectForKey("score") as! Int
 
                 /* Add new high score profile to score tower using score as index */
-                self.scoreTower[self.score] = profile
+                self.scoreTower[profile.score] = profile
             }
         }
 
