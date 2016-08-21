@@ -8,7 +8,7 @@ Now we know about other players, as this information is retrieved from the Fireb
 > [info]
 > *From this point on you are required to test on device*
 
-#Authentication
+##Authentication
 
 The first step is authentication with Facebook using the Facebook SDK, this code is well documented at [Facebook Docs](https://developers.facebook.com/docs/)
 
@@ -16,23 +16,23 @@ The first step is authentication with Facebook using the Facebook SDK, this code
 2. If not then request a login and ask for permission for the user's profile, email and friends list.
 
 > [action]
-> Add the following code before the Firebase query in `didMoveToView(...)`
+> Add the following code before the Firebase query in `didMove(...)`
 >
 ```
 /* Facebook authentication check */
-if (FBSDKAccessToken.currentAccessToken() == nil) {
->
+if (FBSDKAccessToken.current() == nil) {
+>            
     /* No access token, begin FB authentication process */
-    FBSDKLoginManager().logInWithReadPermissions(["public_profile","email","user_friends"], fromViewController:self.view?.window?.rootViewController, handler: {
+    FBSDKLoginManager().logIn(withReadPermissions: ["public_profile","email","user_friends"], from:self.view?.window?.rootViewController, handler: {
         (facebookResult, facebookError) -> Void in
->        
+>                
         if facebookError != nil {
             print("Facebook login failed. Error \(facebookError)")
-        } else if facebookResult.isCancelled {
+        } else if facebookResult!.isCancelled {
             print("Facebook login was cancelled.")
         } else {
-            let accessToken = FBSDKAccessToken.currentAccessToken().tokenString
->            
+            let accessToken = FBSDKAccessToken.current().tokenString
+>                    
             print(accessToken)
         }
     })
@@ -62,16 +62,18 @@ Next you will add code to look up the user's profile and then store this informa
 >
 ```
 /* Facebook profile lookup */
-if (FBSDKAccessToken.currentAccessToken() != nil) {
->
-    FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name"]).startWithCompletionHandler({ (connection, result, error) -> Void in
+if (FBSDKAccessToken.current() != nil) {
+>            
+    FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, first_name"]).start(completionHandler: { (connection, result, error) -> Void in
         if (error == nil){
->
-            /* Update player profile */
-            self.playerProfile.facebookId = result.valueForKey("id") as! String
-            self.playerProfile.name = result.valueForKey("first_name") as! String
-            self.playerProfile.imgURL = "https://graph.facebook.com/\(self.playerProfile.facebookId)/picture?type=small"
-            print(self.playerProfile)
+>                
+            if let result = result as? NSDictionary {
+                /* Update player profile */
+                self.playerProfile.facebookId = result.value(forKey: "id") as! String
+                self.playerProfile.name = result.value(forKey: "first_name") as! String
+                self.playerProfile.imgURL = "https://graph.facebook.com/\(self.playerProfile.facebookId)/picture?type=small"
+                print(self.playerProfile)
+            }
         }
     })
 }
@@ -88,31 +90,30 @@ Now you are ready to save your own profile to the Firebase database!
 You don't want to save it every time the game ends, only when you've reached a new high score.  You should also only save data if this profile has a Facebook id.
 
 > [action]
-> Add the following code in the `gameOver` method, after `character.runAction(...)`:
+> Add the following code in the `gameOver` method, after `character.run(...)`:
 >
 ```
 /* Check for new high score and has a facebook user id */
 if score > playerProfile.score && !playerProfile.facebookId.isEmpty {
->
+>            
     /* Update profile score */
     playerProfile.score = score
->    
+>            
     /* Build data structure to be saved to firebase */
     let saveProfile = [playerProfile.name :
         ["image" : playerProfile.imgURL,
             "score" : playerProfile.score,
             "id" : playerProfile.facebookId ]]
->    
-    /* Save to Firebase */
+>            
+    /* Save to Firebase */      
     firebaseRef.updateChildValues(saveProfile, withCompletionBlock: {
-        (error:NSError?, ref:FIRDatabaseReference!) in
+        (error:Error?, ref:FIRDatabaseReference!) in
         if (error != nil) {
-            print("Data save failed: ",error)
+            print("Data save failed: ", error)
         } else {
             print("Data saved success")
         }
     })
->    
 }
 ```
 >
@@ -122,7 +123,7 @@ You should have gotten a notification in the console of `Data saved success`.
 
 The moment of truth, navigate to your Firebase database view and you will hopefully see something like this.
 
-![Database view](database_view_final.png)
+![Database view](../Tutorial-Images/database_view_final.png)
 
 #Summary
 
