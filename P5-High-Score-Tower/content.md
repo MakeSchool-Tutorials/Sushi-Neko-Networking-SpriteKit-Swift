@@ -68,23 +68,23 @@ Do you remember the game state management from the previous Sushi Neko tutorial?
 ```
 /* Tracking enum for game state */
 enum GameState {
-    case Title, Ready, Playing, GameOver
+    case title, ready, playing, gameOver
 }
 ```
 
-It would be nice to hook into this and add a new *GameState*, some sort of pre-title state for loading data.  How about `Loading` :]
+It would be nice to hook into this and add a new *GameState*, some sort of pre-title state for loading data.  How about `loading` :]
 
 ##The loading state
 
 > [action]
-> Add an additional `Loading` state to the beginning of the *GameState* enum.
+> Add an additional `loading` state to the beginning of the *GameState* enum.
 
 Now you have a new state, let's put it into action.
 
 > [action]
-> Change the default `state` to `.Loading`
+> Change the default `state` to `.loading`
 
-You want to break out the initial `addPiece` method calls into a new function so this action can be called after `.Loading`.
+You want to break out the initial `addPiece` method calls into a new function so this action can be called after `.loading`.
 
 > [action]
 > Add the following method to the *GameScene* class
@@ -94,14 +94,14 @@ func stackSushi() {
     /* Seed the sushi tower */
 >
     /* Manually stack the start of the tower */
-    addTowerPiece(.None)
-    addTowerPiece(.Right)
+    addTowerPiece(.none)
+    addTowerPiece(.right)
 >
     /* Randomize tower to just outside of the screen */
     addRandomPieces(10)
 }
 ```
-> Remove those method calls from `didMoveToView(...)`
+> Remove those method calls from `didMove(...)`
 
 Run the game...
 Oh no it's broken...
@@ -113,9 +113,9 @@ You have the high score tower data but no sushi tower.  You need to call `stackS
 >
 ```
 /* Game management */
-var state: GameState = .Loading {
+var state: GameState = .loading {
     didSet {
-        if state == .Title {
+        if state == .title {
             stackSushi()
         }
     }
@@ -126,42 +126,44 @@ var state: GameState = .Loading {
 <!-- -->
 
 > [action]
-> Change the game state to `.Title` after the profile data has been loaded.
+> Change the game state to `.title` after the profile data has been loaded.
 
 <!-- -->
 
 Your code should look as follows for the Firebase call:
 
 ```
-firebaseRef.queryOrderedByChild("score").queryLimitedToLast(5).observeEventType(.Value, withBlock: { snapshot in
+firebaseRef.queryOrdered(byChild: "score").queryLimited(toLast: 5).observe(.value, with: { snapshot in
 
-        /* Check snapshot has results */
-        if snapshot.exists() {
+    /* Check snapshot has results */
+    if snapshot.exists() {
 
-            /* Loop through data entries */
-            for child in snapshot.children {
+        /* Loop through data entries */
+        for child in snapshot.children.allObjects as! [FIRDataSnapshot] {
 
-                /* Create new player profile */
-                var profile = Profile()
+            /* Create new player profile */
+            var profile = Profile()
 
-                /* Assign player name */
-                profile.name = child.key
+            /* Assign player name */
+            profile.name = child.key
 
-                /* Assign profile data */
-                profile.imgURL = child.value.objectForKey("image") as! String
-                profile.facebookId = child.value.objectForKey("id") as! String
-                profile.score = child.value.objectForKey("score") as! Int
+            /* Get our dictionary of data */
+            let data = child.value as? NSDictionary
 
-                /* Add new high score profile to score tower using score as index */
-                self.scoreTower[profile.score] = profile
-            }
+            /* Assign profile data */
+            profile.imgURL = data?.object(forKey: "image") as! String
+            profile.facebookId = data?.object(forKey: "id") as! String
+            profile.score = data?.object(forKey: "score") as! Int
+
+            /* Add new high score profile to score tower using score as index */
+            self.scoreTower[profile.score] = profile
         }
-
-        self.state = .Title
-
-    }) { (error) in
-        print(error.localizedDescription)
     }
+
+    self.state = .title
+
+}) { (error) in
+    print(error.localizedDescription)
 }
 ```
 
@@ -206,8 +208,8 @@ There is no direct method to create an *SKSpriteNode* from a URL. You have to ju
 > This process would look like:
 >
 ```
-let imgURL = NSURL(string: profile.imgURL)
-let imgData = NSData(contentsOfURL: imgURL)
+let imgURL = URL(string: profile.imgURL)
+let imgData = Data(contentsOfURL: imgURL)
 let img = UIImage(data: imgData)
 let imgTex = SKTexture(image: img)
 let imgNode = SKSpriteNode(texture: imgTex, size: CGSize(width: 50, height: 50))
@@ -222,12 +224,12 @@ When dealing with data that could possibly be invalid, it's good to use the `gua
 ```
 /* Do we have a social score to add to the current sushi piece? */
 guard let profile = scoreTower[sushiCounter] else { return }
->
+>        
 /* Grab profile image */
-guard let imgURL = NSURL(string: profile.imgURL) else { return }
+guard let imgURL = URL(string: profile.imgURL) else { return }
 >
 /* Perform image download task */
-guard let imgData = NSData(contentsOfURL: imgURL) else { return }
+guard let imgData = Data(contentsOfURL: imgURL) else { return }
 guard let img = UIImage(data: imgData) else { return }
 >
 /* Create texture from image */
@@ -254,15 +256,15 @@ imgNode.zPosition = newPiece.zPosition + 1
 >
 ```
 /* Create background border */
-let imgNodeBg = SKSpriteNode(color: UIColor.grayColor(), size: CGSize(width: 52, height: 52))
->
+let imgNodeBg = SKSpriteNode(color: UIColor.gray, size: CGSize(width: 52, height: 52))
+>                
 /* Add as child of sushi piece */
 newPiece.addChild(imgNodeBg)
 imgNodeBg.zPosition = newPiece.zPosition + 1
->
+>                
 /* Create a new sprite using profile texture, cap size */
 let imgNode = SKSpriteNode(texture: imgTex, size: CGSize(width: 50, height: 50))
->
+>                
 /* Add profile sprite as child of sushi piece */
 imgNodeBg.addChild(imgNode)
 imgNode.zPosition = imgNodeBg.zPosition + 1
@@ -277,7 +279,7 @@ Run the game, it should now look like this:
 
 The code you just wrote is running synchronously, right now it's just 1 profile image.  What if you had the maximum 5 results? Even on good WiFi this will produce a noticeable delay, the player will tap the screen and nothing will happen.  What if they have limited mobile data speed, that 1-2s delay on WiFi could increase to 10s or more.
 
-You will make use of *dispatch_async*, this lets you run a block of code to execute on another queue.
+You will make use of *DispatchQueue.async*, this lets you run a block of code to execute on another queue.
 Time for you to wrap up this process.
 
 > [action]
@@ -288,41 +290,41 @@ Time for you to wrap up this process.
 guard let profile = scoreTower[sushiCounter] else { return }
 >
 /* Grab profile image */
-guard let imgURL = NSURL(string: profile.imgURL) else { return }
+guard let imgURL = URL(string: profile.imgURL) else { return }
 >
 /* Perform code block asynchronously in background queue */
-dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
 >    
     /* Perform image download task */
-    guard let imgData = NSData(contentsOfURL: imgURL) else { return }
+    guard let imgData = Data(contentsOfURL: imgURL) else { return }
     guard let img = UIImage(data: imgData) else { return }
 >    
     /* Create texture from image */
     let imgTex = SKTexture(image: img)
 >    
     /* Create background border */
-    let imgNodeBg = SKSpriteNode(color: UIColor.grayColor(), size: CGSize(width: 52, height: 52))
->    
+    let imgNodeBg = SKSpriteNode(color: UIColor.gray, size: CGSize(width: 52, height: 52))
+>                
     /* Add as child of sushi piece */
     newPiece.addChild(imgNodeBg)
     imgNodeBg.zPosition = newPiece.zPosition + 1
->    
+>                
     /* Create a new sprite using profile texture, cap size */
     let imgNode = SKSpriteNode(texture: imgTex, size: CGSize(width: 50, height: 50))
->    
+>                
     /* Add profile sprite as child of sushi piece */
     imgNodeBg.addChild(imgNode)
     imgNode.zPosition = imgNodeBg.zPosition + 1
 }
 ```
 
-You will have noticed that the first two actions are outside of the `dispatch_async`, these are quick
-sanity checks that can be performed before beginning the more expensive `dispatch_async` operation.
+You will have noticed that the first two actions are outside of the `DispatchQueue.async`, these are quick
+sanity checks that can be performed before beginning the more expensive `DispatchQueue.async` operation.
 
 Run the game.
 Oh no it crashes! But why?
 
-There is a problem here, you've correctly moved this code to be performed in a background queue.  The image is downloaded with no problems.  However, there is a problem, your game is taking place in the `main_queue`. So you need to ensure you that sprite creation code is called in the `main_queue`.
+There is a problem here, you've correctly moved this code to be performed in a background queue.  The image is downloaded with no problems.  However, there is a problem, your game is taking place in the `main` queue. So you need to ensure you that sprite creation code is called in the `main` queue.
 
 > [action]
 > Replace the previous code block as shown:
@@ -332,31 +334,31 @@ There is a problem here, you've correctly moved this code to be performed in a b
 guard let profile = scoreTower[sushiCounter] else { return }
 >
 /* Grab profile image */
-guard let imgURL = NSURL(string: profile.imgURL) else { return }
+guard let imgURL = URL(string: profile.imgURL) else { return }
 >
 /* Perform code block asynchronously in background queue */
-dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
->    
+DispatchQueue.global(qos: DispatchQoS.QoSClass.default).async {
+>
     /* Perform image download task */
-    guard let imgData = NSData(contentsOfURL: imgURL) else { return }
+    guard let imgData = try? Data(contentsOf: imgURL) else { return }
     guard let img = UIImage(data: imgData) else { return }
->    
+>
     /* Perform code block asynchronously in main queue */
-    dispatch_async(dispatch_get_main_queue()) {
->        
+    DispatchQueue.main.async {
+>
         /* Create texture from image */
         let imgTex = SKTexture(image: img)
->        
+>
         /* Create background border */
-        let imgNodeBg = SKSpriteNode(color: UIColor.grayColor(), size: CGSize(width: 52, height: 52))
->        
+        let imgNodeBg = SKSpriteNode(color: UIColor.gray, size: CGSize(width: 52, height: 52))
+>
         /* Add as child of sushi piece */
         newPiece.addChild(imgNodeBg)
         imgNodeBg.zPosition = newPiece.zPosition + 1
->        
+>
         /* Create a new sprite using profile texture, cap size */
         let imgNode = SKSpriteNode(texture: imgTex, size: CGSize(width: 50, height: 50))
->        
+>
         /* Add profile sprite as child of sushi piece */
         imgNodeBg.addChild(imgNode)
         imgNode.zPosition = imgNodeBg.zPosition + 1

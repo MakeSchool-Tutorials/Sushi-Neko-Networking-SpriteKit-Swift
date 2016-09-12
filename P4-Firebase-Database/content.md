@@ -15,7 +15,7 @@ First you need to create a reference to your Firebase database.
 >
 ```
 /* Firebase connection */
-    var firebaseRef = FIRDatabase.database().referenceWithPath("/highscore")  
+    var firebaseRef = FIRDatabase.database().reference(withPath: "/highscore")
 ```
 >
 
@@ -28,10 +28,10 @@ Firebase offers different ways to retrieve information, you can subscribe to eve
 In this tutorial you don't really need to be notified the instant someone gets a high score.  You will be instead using a query to read-once and pull back the top 5 high scores.
 
 > [action]
-> Add this code to the end of the `didMoveToView(...)` method:
+> Add this code to the end of the `didMove(...)` method:
 >
 ```
-firebaseRef.queryOrderedByChild("score").queryLimitedToLast(5).observeEventType(.Value, withBlock: { snapshot in
+firebaseRef.queryOrdered(byChild: "score").queryLimited(toLast: 5).observe(.value, with: { snapshot in
 >
     /* Check snapshot has results */
     if snapshot.exists() {
@@ -82,27 +82,30 @@ Great, now you have a struct to store the Firebase data.
 ##Populating profile struct
 
 > [action]
-> Replace your `firebaseRef.queryOrderedByChild(...)` method with the following:
+> Replace your `firebaseRef.queryOrdered(...)` method with the following:
 >
 ```
-firebaseRef.queryOrderedByChild("score").queryLimitedToLast(5).observeEventType(.Value, withBlock: { snapshot in
->    
+firebaseRef.queryOrdered(byChild: "score").queryLimited(toLast: 5).observe(.value, with: { snapshot in
+>            
     /* Check snapshot has results */
     if snapshot.exists() {
->        
+>                
         /* Loop through data entries */
-        for child in snapshot.children {
->            
+        for child in snapshot.children.allObjects as! [FIRDataSnapshot] {
+>                    
             /* Create new player profile */
             var profile = Profile()
->            
+>                    
             /* Assign player name */
             profile.name = child.key
->            
+>                    
+            /* Get our dictionary of data */
+            let data = child.value as? NSDictionary
+>                    
             /* Assign profile data */
-            profile.imgURL = child.value.objectForKey("image") as! String
-            profile.facebookId = child.value.objectForKey("id") as! String
-            profile.score = child.value.objectForKey("score") as! Int
+            profile.imgURL = data?.object(forKey: "image") as! String
+            profile.facebookId = data?.object(forKey: "id") as! String
+            profile.score = data?.object(forKey:    "score") as! Int
 >            
             print(profile)
         }

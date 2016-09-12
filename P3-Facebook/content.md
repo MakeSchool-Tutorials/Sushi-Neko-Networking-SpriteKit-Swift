@@ -31,17 +31,18 @@ Finally time to add some code to your project! Wait.... The sample code given is
 > Open *AppDelegate.swift* and add the following library import:
 >
 ```
+import Firebase
 import FBSDKCoreKit
 ```
 >
 > Next add the following method to the *AppDelegate* class.
 >
 ```
-func application(application: UIApplication, openURL url: NSURL,
-                 sourceApplication: String?, annotation: AnyObject) -> Bool {
+func application(_ application: UIApplication, open url: URL,
+                     sourceApplication: String?, annotation: Any) -> Bool {
     return FBSDKApplicationDelegate.sharedInstance()
-        .application(application, openURL: url,
-                     sourceApplication: sourceApplication, annotation: annotation)
+            .application(application, open: url,
+                         sourceApplication: sourceApplication, annotation: annotation)
 }
 ```
 >
